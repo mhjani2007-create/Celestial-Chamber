@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather App</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Weather Dashboard</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="city"
+                placeholder="Enter City"
+                required
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        {% if weather %}
+
+        <div class="weather-card">
+
+            <h2>
+                {{ weather.location.name }},
+                {{ weather.location.country }}
+            </h2>
+
+            <h3>
+                {{ weather.current.temp_c }} °C
+            </h3>
+
+            <p>
+                {{ weather.current.condition.text }}
+            </p>
+
+            <img
+                src="{{ weather.current.condition.icon }}"
+            >
+
+            <p>
+                Humidity:
+                {{ weather.current.humidity }}%
+            </p>
+
+            <p>
+                Wind:
+                {{ weather.current.wind_kph }} kph
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
